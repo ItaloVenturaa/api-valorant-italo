@@ -1,35 +1,51 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import axios from 'axios';
+import './App.css';
+import AgentCard from './components/AgentCard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Form, Button } from 'react-bootstrap';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [agentName, setAgentName] = useState('');
+  const [agentData, setAgentData] = useState(null);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get('https://valorant-api.com/v1/agents?isPlayableCharacter=true');
+      const agents = res.data.data;
+      const found = agents.find((a) =>
+        a.displayName.toLowerCase() === agentName.trim().toLowerCase()
+      );
+      setAgentData(found || null);
+    } catch (err) {
+      console.error(err);
+      setAgentData(null);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container className="my-4">
+      <h1 className="text-center">Valorant Agentes</h1>
+      <Form onSubmit={handleSearch} className="my-4">
+        <Form.Group className="mb-3">
+          <Form.Label>Pesquisar Agente</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ex: Fade"
+            value={agentName}
+            onChange={(e) => setAgentName(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit">Pesquisar</Button>
+      </Form>
+
+      <AgentCard agent={agentData} />
+    </Container>
+  );
 }
 
-export default App
+export default App;

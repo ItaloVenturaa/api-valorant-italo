@@ -1,10 +1,11 @@
-// src/App.jsx
+// src/pages/Home.jsx
 import React from 'react';
+import "../style/style.css";
 import { Container, Alert } from 'react-bootstrap';
-import { SearchProvider, useSearch } from './contexts/SearchContext';
-import SearchBar from './components/SearchBar';
-import AgentCard from './components/AgentCard';
-import MapCard from './components/MapCard';
+import { SearchProvider, useSearch } from '../contexts/SearchContext';
+import SearchBar from '../components/SearchBar';
+import AgentCard from '../components/AgentCard';
+import MapCard from '../components/MapCard';
 
 function ErrorMessage() {
   const { error } = useSearch();
@@ -24,7 +25,7 @@ function Content() {
   );
 }
 
-export default function App() {
+export default function Home() {
   return (
     <SearchProvider>
       <Container className="d-flex justify-content-center align-items-center min-vh-100">
@@ -36,4 +37,3 @@ export default function App() {
     </SearchProvider>
   );
 }
-

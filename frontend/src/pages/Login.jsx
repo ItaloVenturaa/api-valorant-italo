@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../style/Login.css'; // ou ../style/style.css, se preferir
+import '../style/login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,11 +9,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // if (username === 'admin' && password === 'admin') {
-    //  console.log('Autenticação bem-sucedida!');
-    //} else {
-    //   setError('Usuário ou senha inválidos. Tente novamente.');
-    //}
     if (username === '' || password === '') {
       setError('Usuário ou senha inválidos. Tente novamente.');
     } else {
@@ -37,41 +32,36 @@ const Login = () => {
             )}
 
             <form onSubmit={handleLogin} noValidate>
-              <div className="input-container">
-                <i className="fa fa-user"></i>
-                <label htmlFor="username">Usuário</label>
+              <div className="input-wrapper">
+                <img src="/icons/user-solid.svg" alt="usuário" className="icon" />
                 <input
                   type="text"
-                  id="username"
+                  placeholder="Digite seu usuário"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
               </div>
 
-              <div className="input-container">
-                <i className="fa fa-lock"></i>
-                <label htmlFor="password">Senha</label>
+              <div className="input-wrapper">
+                <img src="/icons/lock-solid.svg" alt="senha" className="icon" />
                 <input
                   type="password"
-                  id="password"
+                  placeholder="Digite sua senha"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
 
+
               <button type="submit" className="btn w-100">Entrar</button>
 
-              <div className="options">
-                <p>Não tem uma conta?</p>
-                <a href="/register">Registre-se aqui</a>
-              </div>
             </form>
           </div>
 
           <div className="background-container">
-            <img src="public/background.png" alt="Fundo" />
+            <img src="/Neon_Artwork.png" alt="Neon Valorant" />
           </div>
 
         </div>

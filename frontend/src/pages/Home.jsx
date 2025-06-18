@@ -1,6 +1,7 @@
 // src/pages/Home.jsx
 import React from 'react';
 import "../style/style.css";
+import useAuth from '../hooks/useAuth';
 import { Container, Alert } from 'react-bootstrap';
 import { SearchProvider, useSearch } from '../contexts/SearchContext';
 import SearchBar from '../components/SearchBar';
@@ -26,6 +27,9 @@ function Content() {
 }
 
 export default function Home() {
+
+    useAuth(); //hook para verificar autenticação com isso verifica se o usuário está autenticado antes de renderizar a página
+
   return (
     <SearchProvider>
       <Container className="d-flex justify-content-center align-items-center min-vh-100">

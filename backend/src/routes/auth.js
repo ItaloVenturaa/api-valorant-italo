@@ -1,22 +1,43 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { findUserByUsername } from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 const router = express.Router();
-const SECRET = 'seuSegredoSuperSeguro';
+
+const JWT_SECRET = process.env.JWT_SECRET || 'segredo-padrao-inseguro';
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
-  const user = await findUserByUsername(username);
 
-  if (!user) return res.status(401).json({ error: 'Usuário não encontrado' });
+  try {
+    const user = await User.findOne({ username });
 
-  const valid = await bcrypt.compare(password, user.passwordHash);
-  if (!valid) return res.status(401).json({ error: 'Senha incorreta' });
+    if (!user) {
+      return res.status(401).json({ error: 'Usuário não encontrado' });
+    }
 
-  const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '1h' });
-  res.json({ token });
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Senha incorreta' });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username,
+        isAdmin: user.isAdmin,
+      },
+      JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    res.json({ token });
+  } catch (err) {
+    console.error('Erro no login:', err);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
 });
 
 export default router;

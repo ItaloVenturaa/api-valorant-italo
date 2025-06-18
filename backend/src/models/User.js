@@ -1,13 +1,21 @@
-import { openDb } from '../config/db.js';
-import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 
-export async function findUserByUsername(username) {
-  const db = await openDb();
-  return db.get('SELECT * FROM users WHERE username = ?', [username]);
-}
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minlength: 3,
+  },
+  passwordHash: {
+    type: String,
+    required: true,
+  }
+}, {
+  timestamps: true 
+});
 
-export async function createUser(username, password) {
-  const db = await openDb();
-  const passwordHash = await bcrypt.hash(password, 10);
-  return db.run('INSERT INTO users (username, passwordHash) VALUES (?, ?)', [username, passwordHash]);
-}
+const User = mongoose.model('User', userSchema);
+
+export default User;

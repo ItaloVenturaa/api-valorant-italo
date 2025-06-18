@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../style/login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // hook para redirecionamento
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (username === '' || password === '') {
-      setError('Usuário ou senha inválidos. Tente novamente.');
-    } else {
-      setError('');
-      console.log('Login enviado:', { username, password });
+      setError('Preencha todos os campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Erro ao fazer login');
+      }
+
+      localStorage.setItem('token', data.token);
+      navigate('/home');
+    } catch (err) {
+      setError(err.message);
     }
   };
 

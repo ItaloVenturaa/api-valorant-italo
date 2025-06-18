@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import authRoutes from './src/routes/auth.js';
+import authRoutes from './routes/auth.js';
 import dotenv from 'dotenv';
-import conectaNaDatabase from './src/config/db.js';
+import conectaNaDatabase from './config/db.js';
 
-dotenv.config();            // carregar .env primeiro
-conectaNaDatabase();        // agora sim, pode usar process.env
+dotenv.config();         
+conectaNaDatabase();       
 
 const app = express();
 app.use(cors());

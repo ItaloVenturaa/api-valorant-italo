@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { useSelection } from '../contexts/SelectionContext';
+import { useSelected } from '../contexts/SelectedContext'; // ✅ nome correto
 
 export default function MapCard({ map }) {
-  const { addItem } = useSelection();
+  const { addItem } = useSelected(); // ✅ função do contexto
 
   if (!map) return null;
 
@@ -22,7 +22,7 @@ export default function MapCard({ map }) {
         <Card.Text>{map.narrativeDescription || 'Sem descrição disponível.'}</Card.Text>
 
         <Button variant="success" className="mt-3" onClick={() => addItem(map)}>
-          Adicionar aos selecionados
+          Adicionar aos Favoritos
         </Button>
       </Card.Body>
     </Card>

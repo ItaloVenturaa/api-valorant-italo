@@ -24,3 +24,22 @@ export const fetchMapInfo = async (name) => {
   if (!found) throw new Error('Mapa não encontrado');
   return found;
 };
+
+export const fetchProtectedAgents = async (token) => {
+  const response = await axios.get('http://localhost:8000/data/agents', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+// Busca protegida de mapas (apenas para admin)
+export const fetchProtectedMaps = async (token) => {
+  const response = await axios.get('http://localhost:8000/data/maps', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};

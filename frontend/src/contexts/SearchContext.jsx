@@ -1,6 +1,7 @@
 // src/contexts/SearchContext.jsx
 import React, { createContext, useState, useContext } from 'react';
-import { fetchAgentInfo, fetchMapInfo } from '../services/api';
+import { fetchProtectedAgents, fetchProtectedMaps } from '../services/api';
+
 
 const SearchContext = createContext();
 
@@ -9,34 +10,42 @@ export const SearchProvider = ({ children }) => {
   const [mapInfo, setMapInfo] = useState(null);
   const [error, setError] = useState('');
 
-  const handleSearch = async (agentTerm, mapTerm) => {
-    try {
-      if (!agentTerm && !mapTerm) {
-        displayError('Preencha pelo menos um campo.');
-        return;
-      }
+const handleSearch = async (agentTerm, mapTerm) => {
+  const token = localStorage.getItem('token');
 
-      if (agentTerm && mapTerm) {
-        displayError('Preencha apenas um dos campos: Agente ou Mapa.');
-        return;
-      }
-
-      clearResults();
-
-      if (agentTerm) {
-        const agentData = await fetchAgentInfo(agentTerm);
-        displayAgentInfo(agentData);
-      }
-
-      if (mapTerm) {
-        const mapData = await fetchMapInfo(mapTerm);
-        displayMapInfo(mapData);
-      }
-    } catch (error) {
-      console.error(error);
-      displayError(error.message);
+  try {
+    if (!agentTerm && !mapTerm) {
+      displayError('Preencha pelo menos um campo.');
+      return;
     }
-  };
+
+    if (agentTerm && mapTerm) {
+      displayError('Preencha apenas um dos campos: Agente ou Mapa.');
+      return;
+    }
+
+    clearResults();
+
+    if (agentTerm) {
+      const agents = await fetchProtectedAgents(token);
+      const found = agents.find(agent => agent.displayName.toLowerCase() === agentTerm.toLowerCase());
+      if (!found) throw new Error('Agente não encontrado');
+      displayAgentInfo(found);
+    }
+
+    if (mapTerm) {
+      const maps = await fetchProtectedMaps(token); // Vai lançar 403 se não for admin
+      const found = maps.find(map => map.displayName.toLowerCase() === mapTerm.toLowerCase());
+      if (!found) throw new Error('Mapa não encontrado');
+      displayMapInfo(found);
+    }
+
+  } catch (error) {
+    console.error(error);
+    displayError(error.response?.data?.error || error.message);
+  }
+};
+
 
   const clearResults = () => {
     setAgentInfo(null);

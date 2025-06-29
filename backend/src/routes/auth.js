@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
         isAdmin: user.isAdmin,
       },
       JWT_SECRET,
-      { expiresIn: '1h' }
+       { expiresIn: process.env.JWT_EXPIRATION || '1h' } 
       //{ expiresIn: '5s' }
     );
 

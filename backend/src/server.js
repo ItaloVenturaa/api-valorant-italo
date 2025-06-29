@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth.js';
 import dotenv from 'dotenv';
 import conectaNaDatabase from './config/db.js';
+import dataRoutes from './routes/data.js';
 
 dotenv.config();         
 conectaNaDatabase();       
@@ -12,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/login', authRoutes);
+app.use('/data', dataRoutes);
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

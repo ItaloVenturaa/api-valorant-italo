@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
       },
       JWT_SECRET,
       { expiresIn: '1h' }
+      //{ expiresIn: '5s' }
     );
 
     res.json({ token });

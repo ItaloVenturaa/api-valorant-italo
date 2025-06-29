@@ -1,11 +1,14 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import User from '../models/User.js';
 
-const router = express.Router();
+dotenv.config(); 
 
+const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'segredo-padrao-inseguro';
+
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;

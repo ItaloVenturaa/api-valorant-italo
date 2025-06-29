@@ -1,8 +1,10 @@
-// src/components/MapCard.jsx
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import { useSelection } from '../contexts/SelectionContext';
 
 export default function MapCard({ map }) {
+  const { addItem } = useSelection();
+
   if (!map) return null;
 
   return (
@@ -18,6 +20,10 @@ export default function MapCard({ map }) {
       <Card.Body>
         <Card.Title>{map.displayName}</Card.Title>
         <Card.Text>{map.narrativeDescription || 'Sem descrição disponível.'}</Card.Text>
+
+        <Button variant="success" className="mt-3" onClick={() => addItem(map)}>
+          Adicionar aos selecionados
+        </Button>
       </Card.Body>
     </Card>
   );

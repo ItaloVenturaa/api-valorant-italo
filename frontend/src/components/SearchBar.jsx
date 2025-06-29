@@ -17,16 +17,16 @@ export default function SearchBar() {
     <Form onSubmit={onSubmit}>
       <Row className="justify-content-center">
         <Col xs="auto">
-          <Form.Label>Pesquisar Agente:</Form.Label>
+          <Form.Label style={{ color: '#e0e0e0' }}>Pesquisar Agente:</Form.Label>
           <Form.Control
-            type="text"
+            type="text" 
             placeholder="Nome do Agente"
             value={agentQuery}
             onChange={(e) => setAgentQuery(e.target.value)}
           />
         </Col>
         <Col xs="auto">
-          <Form.Label>Pesquisar Mapa:</Form.Label>
+          <Form.Label style={{ color: '#e0e0e0' }}>Pesquisar Mapa:</Form.Label>
           <Form.Control
             type="text"
             placeholder="Nome do Mapa"

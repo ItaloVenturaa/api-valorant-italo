@@ -3,11 +3,12 @@ import "../style/style.css";
 import useAuth from '../hooks/useAuth';
 import { Container, Alert } from 'react-bootstrap';
 import { SearchProvider, useSearch } from '../contexts/SearchContext';
-import { SelectedProvider } from '../contexts/SelectedContext'; // <- IMPORTADO AQUI
+import { SelectedProvider } from '../contexts/SelectedContext';
 import SearchBar from '../components/SearchBar';
 import AgentCard from '../components/AgentCard';
 import MapCard from '../components/MapCard';
 import SelectedList from '../components/SelectedList';
+import AdminBox from '../components/AdminBox'; // ✅ novo componente
 
 function ErrorMessage() {
   const { error } = useSearch();
@@ -31,15 +32,20 @@ function Content() {
 export default function Home() {
   useAuth(); // Verifica se o usuário está autenticado antes de renderizar a página
 
-   return (
-    <SelectedProvider> {/* <- Agora é o mais externo */}
-      <SearchProvider> {/* <- Depois vem o Search */}
-        <Container className="d-flex justify-content-center align-items-center min-vh-100">
-          <div className="w-100" style={{ maxWidth: '700px' }}>
-            <h1 className="text-center mb-4">Pesquisa Valorant</h1>
-            <Content />
-          </div>
-        </Container>
+  return (
+    <SelectedProvider> 
+      <SearchProvider> 
+        <div className="position-relative min-vh-100 d-flex align-items-center justify-content-center">
+          <AdminBox /> {/* ✅ botão de admin fixado no topo */}
+          <Container className="d-flex justify-content-center align-items-center">
+            <div className="w-100" style={{ maxWidth: '700px' }}>
+              <h1 className="text-center mb-4" style={{ color: '#e0e0e0' }}>
+                Pesquisa Valorant
+              </h1>
+              <Content />
+            </div>
+          </Container>
+        </div>
       </SearchProvider>
     </SelectedProvider>
   );

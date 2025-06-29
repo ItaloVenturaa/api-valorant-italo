@@ -6,7 +6,7 @@ export default function SelectedList() {
   const { selectedItems, removeItem, clearAll } = useSelected();
 
   if (selectedItems.length === 0) {
-    return <p className="text-center mt-4">Nenhum favorito selecionado ainda.</p>;
+    return <p className="text-center mt-4" style={{ color: '#e0e0e0' }}>Nenhum favorito selecionado ainda.</p>;
   }
 
   return (

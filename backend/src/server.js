@@ -5,6 +5,8 @@ import authRoutes from './routes/auth.js';
 import dotenv from 'dotenv';
 import conectaNaDatabase from './config/db.js';
 import dataRoutes from './routes/data.js';
+import registerRoutes from './routes/register.js';
+
 
 dotenv.config();         
 conectaNaDatabase();       
@@ -16,6 +18,7 @@ app.use(express.json());
 
 app.use('/login', authRoutes);
 app.use('/data', dataRoutes);
+app.use('/register', registerRoutes);
 
 
 const PORT = process.env.PORT || 8000;

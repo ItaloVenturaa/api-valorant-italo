@@ -39,6 +39,7 @@ body {
 /* Campos de entrada */
 .input-container {
   margin-bottom: 1rem;
+  color: #212529;
 }
 
 .input-container i {
@@ -50,11 +51,13 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 0.3rem;
+  color: #212529;
 }
 
 .input-container input {
   width: 100%;
   padding: 10px 12px;
+  color: #212529;
   border-radius: 6px;
   border: 1px solid #ccc;
   background-color: #f2f2f2;
@@ -120,6 +123,7 @@ button.btn:hover {
 
 .input-wrapper .icon {
   position: absolute;
+  color: #212529;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
@@ -129,6 +133,7 @@ button.btn:hover {
 
 .input-wrapper input {
   width: 100%;
+  color: #212529;
   padding: 12px 12px 12px 36px; /* espaço para o ícone */
   border-radius: 6px;
   border: 1px solid #ccc;

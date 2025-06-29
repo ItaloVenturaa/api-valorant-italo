@@ -1,77 +1,83 @@
-# 🎮 API Valorant - Ítalo
+# Projeto Valorant - FullStack
 
-Projeto desenvolvido para a disciplina **Programação Web Fullstack (ES47B-ES71)** — Prof. Willian Massami Watanabe.
+Este é um projeto fullstack desenvolvido como parte da disciplina de Desenvolvimento Web FullStack. O objetivo é aplicar conceitos de autenticação, consumo de APIs externas, proteção de rotas, diferença de permissões de usuário e boas práticas de desenvolvimento web.
 
-Aplicação web criada com **React + Vite**, que consome dados da [Valorant API](https://valorant-api.com), utilizando **React Bootstrap** para a interface e **useRef** como hook principal para manipulação de referências DOM.
+## 🌐 Tecnologias Utilizadas
 
----
+### Frontend:
 
-## 🚀 Tecnologias Utilizadas
+* React
+* React Router
+* Bootstrap
+* Vite
 
-- [React.js](https://reactjs.org/)
-- [Vite](https://vitejs.dev/)
-- [React Bootstrap](https://react-bootstrap.github.io/)
-- [Valorant API](https://valorant-api.com/)
-- [Context API](https://reactjs.org/docs/context.html)
-- [useRef Hook](https://reactjs.org/docs/hooks-reference.html#useref)
+### Backend:
 
----
+* Node.js
+* Express
+* MongoDB (via Mongoose)
+* JWT (Json Web Token)
+* dotenv
+* Axios
 
-## 📁 Estrutura do Projeto
+## ⚖️ Funcionalidades
 
-```plaintext
-src/
-├── components/     # Componentes reutilizáveis da interface
-├── contexts/       # Arquivos de contexto (Context API)
-├── hooks/          # Hooks personalizados (se houver)
-├── pages/          # Páginas principais da aplicação
-├── assets/         # Imagens e arquivos estáticos
-├── App.jsx         # Componente principal da aplicação
-└── main.jsx        # Ponto de entrada da aplicação
-```
+* Autenticação com JWT (usuário comum e admin)
+* Restrição de acesso a rotas (admin pode acessar mapas)
+* Busca por agentes e mapas usando a API pública do Valorant
+* Adição de agentes e mapas a uma lista de favoritos (tipo "carrinho")
+* Remoção individual e total dos favoritos
+* Cache em memória no backend (por 1 minuto)
+* Compressão HTTP
+* Logs simples de buscas no terminal
 
----
+## 🔑 Regras de Acesso
 
-## ⚙️ Como Rodar o Projeto Localmente
+* Usuários **comuns** podem pesquisar **somente agentes**
+* Usuários **admin** podem pesquisar **agentes e mapas**
+* Ao tentar pesquisar mapas sendo um usuário comum, é retornada uma mensagem de erro 403
 
-1. **Clone o repositório:**
+## 🚀 Como rodar localmente
 
-```bash
-git clone https://github.com/ItaloVenturaa/api-valorant-italo.git
-cd api-valorant-italo
-```
-
-2. **Instale as dependências:**
+### Backend:
 
 ```bash
+cd backend
 npm install
-```
-
-3. **Inicie o servidor de desenvolvimento:**
-
-```bash
+cp .env.example .env # ou crie manualmente com suas variáveis
 npm run dev
 ```
 
-4. Acesse o projeto em: [http://localhost:5173](http://localhost:5173)
+### Frontend:
 
----
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## 📌 Observações
+### Seed de usuários:
 
-- A aplicação consome a **Valorant API pública**, então pode haver limites de requisição ou variações na resposta.
-- O projeto utiliza **Context API** para gerenciamento de estado global de forma leve.
-- O **useRef** é usado para controlar comportamentos de rolagem e foco nos elementos da UI.
+```bash
+npm run seed
+```
 
----
+Usuários criados:
+
+* **admin** / admin123
+* **user** / user123
+
+## 🔹 Observações
+
+* O frontend está configurado para rodar em `http://localhost:5173`
+* O backend está em `http://localhost:8000`
+* O token JWT expira em 1 hora
 
 ## 🧑‍💻 Autor
 
-**Ítalo Ventura**  
-[GitHub](https://github.com/ItaloVenturaa)
+**Ítalo Ventura**
+Estudante de Análise e Desenvolvimento de Sistemas na UTFPR
 
-## 🌐 Link da aplicação
+[GitHub - ItaloVenturaa](https://github.com/ItaloVenturaa)
 
-A aplicação está disponível em:  
-👉 [https://italoventuraa.github.io/api-valorant-italo/](https://italoventuraa.github.io/api-valorant-italo/)
 

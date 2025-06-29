@@ -80,4 +80,41 @@ Estudante de Análise e Desenvolvimento de Sistemas na UTFPR
 
 [GitHub - ItaloVenturaa](https://github.com/ItaloVenturaa)
 
+## 🔎 Exemplos de busca
 
+Você pode buscar por **Agentes** ou **Mapas** do jogo Valorant.
+
+### 🔹 Agentes disponíveis para busca:
+
+- Jett  
+- Phoenix  
+- Sova  
+- Reyna  
+- Raze  
+- Omen  
+- Sage  
+- Killjoy  
+- Brimstone  
+- Viper  
+- Cypher  
+- Breach  
+- Skye  
+- Chamber  
+- Fade  
+- Harbor  
+- Gekko  
+- Deadlock  
+
+### 🔹 Mapas disponíveis (apenas para administradores):
+
+- Ascent  
+- Bind  
+- Haven  
+- Icebox  
+- Breeze  
+- Split  
+- Lotus  
+- Pearl  
+- Sunset  
+
+> ✅ Obs.: a busca não liga para maiúsculas ou minúsculas, então apenas digite os nomes corretamente.

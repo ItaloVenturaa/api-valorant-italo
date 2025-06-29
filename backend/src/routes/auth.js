@@ -17,12 +17,14 @@ router.post('/', async (req, res) => {
     const user = await User.findOne({ username });
 
     if (!user) {
+      console.log(`[LOGIN FALHOU] Usuário "${username}" não encontrado.`);
       return res.status(401).json({ error: 'Usuário não encontrado' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
+      console.log(`[LOGIN FALHOU] Senha incorreta para o usuário "${username}".`);
       return res.status(401).json({ error: 'Senha incorreta' });
     }
 
@@ -37,6 +39,7 @@ router.post('/', async (req, res) => {
     );
 
     res.json({ token });
+    console.log(`[LOGIN] Usuário "${username}" autenticado com sucesso.`);
   } catch (err) {
     console.error('Erro no login:', err);
     res.status(500).json({ error: 'Erro interno do servidor' });

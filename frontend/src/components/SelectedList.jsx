@@ -18,15 +18,15 @@ export default function SelectedList() {
         </Button>
       </Card.Header>
       <ListGroup variant="flush">
-        {selectedItems.map((item, index) => (
-          <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
+        {selectedItems.map((item) => (
+          <ListGroup.Item key={item.uuid || item.displayName} className="d-flex justify-content-between align-items-center">
             <div>
               <strong>{item.displayName}</strong> —{" "}
               {item.role?.displayName || (
                 <span className="badge bg-info text-dark">Mapa</span>
               )}
             </div>
-            <Button variant="primary" onClick={() => removeItem(index)}>
+            <Button variant="primary" onClick={() => removeItem(item.uuid || item.displayName)}>
               Remover
             </Button>
           </ListGroup.Item>

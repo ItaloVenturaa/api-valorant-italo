@@ -11,9 +11,12 @@ export const SelectedProvider = ({ children }) => {
     }
   };
 
-  const removeItem = (uuid) => {
-    setSelectedItems(selectedItems.filter((item) => item.uuid !== uuid));
-  };
+const removeItem = (id) => {
+  setSelectedItems((prev) =>
+    prev.filter((item) => (item.uuid || item.displayName) !== id)
+  );
+};
+
 
   const clearAll = () => {
     setSelectedItems([]);

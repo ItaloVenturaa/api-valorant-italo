@@ -9,6 +9,7 @@ import registerRoutes from './routes/register.js';
 import agentRoutes from './routes/agentRoutes.js';
 import mapRoutes from './routes/mapRoutes.js';
 import importRoutes from './routes/import.js';
+import { logger } from "../logger.js";
 
 dotenv.config();         
 conectaNaDatabase();       
@@ -28,5 +29,5 @@ app.use('/import', importRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  logger.info(`Servidor rodando na porta ${PORT}`);
 });

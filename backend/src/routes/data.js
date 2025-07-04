@@ -3,6 +3,7 @@ import express from 'express';
 import Agent from '../models/Agent.js';
 import Map from '../models/Map.js';
 import { authenticateToken, authorizeAdmin } from '../middleware/authMiddleware.js';
+import { logger } from '../logger.js';
 
 const router = express.Router();
 
@@ -10,10 +11,10 @@ const router = express.Router();
 router.get('/agents', authenticateToken, async (req, res) => {
   try {
     const agents = await Agent.find();
+    logger.info(`[BUSCA] Usuário "${req.user.username}" buscou por agentes (via MongoDB).`);
     res.json(agents);
-    console.log(`[BUSCA] Usuário "${req.user.username}" buscou por agentes (via MongoDB).`);
   } catch (err) {
-    console.error(err);
+    logger.error('Erro ao buscar agentes:', err);
     res.status(500).json({ error: 'Erro ao buscar agentes.' });
   }
 });
@@ -22,10 +23,10 @@ router.get('/agents', authenticateToken, async (req, res) => {
 router.get('/maps', authenticateToken, authorizeAdmin, async (req, res) => {
   try {
     const maps = await Map.find();
+    logger.info(`[BUSCA ADMIN] Usuário ADMIN "${req.user.username}" buscou por mapas (via MongoDB).`);
     res.json(maps);
-    console.log(`[BUSCA ADMIN] Usuário ADMIN "${req.user.username}" buscou por mapas (via MongoDB).`);
   } catch (err) {
-    console.error(err);
+    logger.error('Erro ao buscar mapas:', err);
     res.status(500).json({ error: 'Erro ao buscar mapas.' });
   }
 });

@@ -27,6 +27,8 @@ router.post('/', authenticateToken, authorizeAdmin, async (req, res) => {
     await Map.insertMany(maps);
 
     res.json({ message: 'Importação concluída', agents: agents.length, maps: maps.length });
+    logger.info(`[IMPORTAÇÃO] Admin "${req.user.username}" importou agentes e mapas`);
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro ao importar dados.' });

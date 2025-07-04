@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
 import { body, validationResult } from 'express-validator';
+import { loginLimiter } from '../middleware/rateLimiter.js';
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'segredo-padrao-inseguro';
 
 router.post(
-  '/',
+  '/', loginLimiter,
   [
     body('username').trim().notEmpty().withMessage('Usuário é obrigatório'),
     body('password').trim().isLength({ min: 4 }).withMessage('Senha deve ter no mínimo 4 caracteres'),

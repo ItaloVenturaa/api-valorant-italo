@@ -1,6 +1,8 @@
 // src/components/AdminBox.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+
 
 export default function AdminBox() {
   const navigate = useNavigate();
@@ -10,19 +12,13 @@ export default function AdminBox() {
 
   if (!decoded?.isAdmin) return null;
 
+  const handleClick = () => {
+    navigate('/register');
+  };
+
   return (
-    <div style={{
-      position: 'absolute',
-      top: '20px',
-      right: '20px',
-      zIndex: 999,
-    }}>
-      <button
-        className="btn btn-outline-light"
-        onClick={() => navigate('/register')}
-      >
-        Criar Usuário
-      </button>
-    </div>
+    <Button variant="primary" onClick={handleClick}>
+      Criar Usuário
+    </Button>
   );
 }

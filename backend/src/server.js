@@ -1,3 +1,5 @@
+// OBS: Este projeto utiliza HTTP em ambiente local por simplicidade de configuração.
+// Em produção, recomenda-se fortemente o uso de HTTPS para garantir a segurança das requisições.
 import express from 'express';
 import cors from 'cors';
 import compression from 'compression';

@@ -73,6 +73,13 @@ Usuários criados:
 * O backend está em `http://localhost:8000`
 * O token JWT expira em 1 hora
 
+## 🔒 HTTPS em ambiente local
+
+Durante o desenvolvimento local, optei por utilizar apenas o protocolo HTTP, uma vez que o uso de HTTPS exige certificados válidos e configurações adicionais no ambiente local, o que foge do escopo educacional deste projeto. 
+
+Em ambientes de produção, recomenda-se fortemente o uso de HTTPS para garantir a segurança da comunicação entre cliente e servidor.
+
+
 ## 🧑‍💻 Autor
 
 **Ítalo Ventura**
